@@ -1,0 +1,340 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>From Bench to Biosphere — Natural Products as Green Chemistry Substitutes</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/fontsource/fonts/inter@latest/latin-400-normal.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/fontsource/fonts/inter@latest/latin-600-normal.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/fontsource/fonts/inter@latest/latin-700-normal.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/fontsource/fonts/ibm-plex-serif@latest/latin-400-normal.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/fontsource/fonts/ibm-plex-serif@latest/latin-700-normal.css">
+<style>
+  :root{
+    --ink:#0f2419;
+    --paper:#f6f1e7;
+    --moss:#2f5d3a;
+    --leaf:#6b8e4e;
+    --amber:#c08a3e;
+    --rust:#a64b2a;
+    --line:#d9cdb3;
+  }
+  html,body{background:var(--paper);color:var(--ink);font-family:'Inter',sans-serif;}
+  .serif{font-family:'IBM Plex Serif',serif;}
+  .paper-grain{
+    background-image:
+      radial-gradient(rgba(15,36,25,0.04) 1px, transparent 1px),
+      radial-gradient(rgba(15,36,25,0.03) 1px, transparent 1px);
+    background-size: 3px 3px, 7px 7px;
+    background-position: 0 0, 1px 2px;
+  }
+  .divider{height:1px;background:linear-gradient(90deg,transparent,var(--line),transparent);}
+  .chip{display:inline-flex;align-items:center;gap:.35rem;padding:.2rem .55rem;border-radius:999px;font-size:.7rem;font-weight:600;letter-spacing:.04em;text-transform:uppercase;}
+  .chip-hazard{background:#f3d9d1;color:var(--rust);border:1px solid #e3b9ab;}
+  .chip-nature{background:#dfe8d3;color:#3a5a28;border:1px solid #b9d09a;}
+  .chip-trl{background:#f0e6cf;color:#7a5a1a;border:1px solid #d9c79a;}
+  .card{
+    background:#fbf7ee;
+    border:1px solid var(--line);
+    border-radius:14px;
+    box-shadow: 0 1px 0 rgba(255,255,255,.6) inset, 0 10px 30px -20px rgba(15,36,25,.25);
+  }
+  .trl-track{height:8px;background:#e7dcc3;border-radius:999px;overflow:hidden;position:relative;}
+  .trl-fill{height:100%;background:linear-gradient(90deg,#c08a3e,#6b8e4e);border-radius:999px;}
+  .tag{font-size:.7rem;letter-spacing:.08em;text-transform:uppercase;color:#5a6b54;}
+  .num-big{font-family:'IBM Plex Serif',serif;font-weight:700;}
+  .hero-img{
+    background-size:cover;background-position:center;
+    filter:saturate(1.05) contrast(1.02);
+  }
+  .pipeline-node{
+    border:1.5px solid var(--moss);
+    background:#fbf7ee;
+    color:var(--moss);
+  }
+  .pipeline-arrow{color:var(--amber);}
+  details > summary{list-style:none;cursor:pointer;}
+  details > summary::-webkit-details-marker{display:none;}
+  details[open] .chev{transform:rotate(180deg);}
+  .chev{transition:transform .2s ease;}
+  .kbd{font-family:ui-monospace,Menlo,Consolas,monospace;font-size:.72rem;background:#efe6cf;padding:.1rem .35rem;border-radius:4px;border:1px solid #d9c79a;color:#5a4417;}
+  .section-label{
+    display:inline-block;font-size:.7rem;letter-spacing:.22em;text-transform:uppercase;
+    color:var(--moss);border:1px solid var(--moss);padding:.25rem .6rem;border-radius:999px;
+  }
+  .quote-mark{font-family:'IBM Plex Serif',serif;color:var(--amber);font-size:3rem;line-height:0;}
+</style>
+</head>
+<body class="paper-grain">
+
+<!-- NAV -->
+<header class="max-w-6xl mx-auto px-6 pt-8 flex items-center justify-between">
+  <div class="flex items-center gap-2">
+    <svg width="28" height="28" viewBox="0 0 28 28" fill="none">
+      <path d="M14 2 C10 8, 6 12, 6 17 a8 8 0 0 0 16 0 C22 12, 18 8, 14 2 Z" fill="#2f5d3a"/>
+      <path d="M14 8 V22" stroke="#f6f1e7" stroke-width="1.3"/>
+      <path d="M14 13 L10 10 M14 16 L18 13" stroke="#f6f1e7" stroke-width="1.3"/>
+    </svg>
+    <span class="font-semibold tracking-wide" style="color:var(--ink);">Phyto<span style="color:var(--moss)">chem</span> Brief</span>
+  </div>
+  <nav class="hidden md:flex gap-7 text-sm" style="color:#3a4a3f;">
+    <a href="#thesis" class="hover:text-[var(--moss)]">Thesis</a>
+    <a href="#classes" class="hover:text-[var(--moss)]">Five Classes</a>
+    <a href="#pipeline" class="hover:text-[var(--moss)]">Pipeline</a>
+    <a href="#synthesis" class="hover:text-[var(--moss)]">Synthesis</a>
+  </nav>
+  <div class="text-xs" style="color:#6b7a6e;">Vol. 07 · Sep 2026</div>
+</header>
+
+<!-- HERO -->
+<section class="max-w-6xl mx-auto px-6 pt-14 pb-10 grid md:grid-cols-12 gap-8 items-center">
+  <div class="md:col-span-7">
+    <span class="section-label">Green Chemistry · Analysis</span>
+    <h1 class="serif mt-5 text-4xl md:text-5xl leading-[1.1]" style="color:var(--ink);">
+      From Bench to Biosphere:
+      <span style="color:var(--moss);">Nature's Library</span> as a Substitute for Hazardous Industrial Chemicals
+    </h1>
+    <p class="serif mt-5 text-lg leading-relaxed" style="color:#2a3a30;">
+      A short analytical brief on how <em>drug-discovery-style screening</em> of natural products is being repurposed to identify safer replacements for five of industry's most problematic chemical classes — from organophosphate pesticides to chlorinated solvents.
+    </p>
+    <div class="mt-6 flex flex-wrap gap-3 text-xs">
+      <span class="chip chip-nature">🌿 5 chemical classes reviewed</span>
+      <span class="chip chip-trl">📊 TRL 2 → 7 mapped</span>
+      <span class="chip chip-hazard">⚠ 12 hazardous compounds referenced</span>
+    </div>
+  </div>
+  <div class="md:col-span-5">
+    <div id="heroImage" class="hero-img rounded-2xl aspect-[4/5] w-full border" style="border-color:var(--line);background-image:url('');"></div>
+    <p class="text-xs mt-2 italic" style="color:#6b7a6e;">Fig. 0 — Botanical feedstocks under investigation as industrial substitutes. Illustration generated for this brief.</p>
+  </div>
+</section>
+
+<div class="divider max-w-6xl mx-auto"></div>
+
+<!-- THESIS -->
+<section id="thesis" class="max-w-6xl mx-auto px-6 py-14 grid md:grid-cols-12 gap-8">
+  <div class="md:col-span-4">
+    <span class="tag">§ 01 — The Thesis</span>
+    <h2 class="serif text-3xl mt-3 leading-tight" style="color:var(--ink);">The same playbook that finds drugs in plants can find <em>greener solvents, safer flame retardants, and kinder pesticides.</em></h2>
+  </div>
+  <div class="md:col-span-8">
+    <div class="relative pl-8">
+      <span class="quote-mark absolute -left-1 -top-2">“</span>
+      <p class="serif text-lg leading-relaxed" style="color:#1f2e24;">
+        For a century, industrial chemistry has optimized for function first and toxicity second. Meanwhile, pharmaceutical R&amp;D has spent decades building a sophisticated toolkit — high-throughput screening, structure–activity modeling, ADMET profiling — to sift through the chemical diversity of the natural world. This brief argues that the environmental-safety problem is, in many ways, the <em>same</em> problem: identify a bioactive molecule, understand its mechanism, and replace a hazardous incumbent with something that degrades cleanly, bioaccumulates less, and still performs the job.
+      </p>
+      <p class="serif text-lg leading-relaxed mt-4" style="color:#1f2e24;">
+        The five case studies below — spanning pesticides, flame retardants, solvents, plasticizers, and preservatives — show that this translation is already underway, at stages from early discovery to commercial deployment.
+      </p>
+    </div>
+  </div>
+</section>
+
+<div class="divider max-w-6xl mx-auto"></div>
+
+<!-- FIVE CLASSES -->
+<section id="classes" class="max-w-6xl mx-auto px-6 py-14">
+  <div class="flex items-end justify-between flex-wrap gap-4 mb-10">
+    <div>
+      <span class="tag">§ 02 — The Five Classes</span>
+      <h2 class="serif text-3xl mt-3">Hazardous incumbents and their botanical challengers</h2>
+    </div>
+    <p class="text-sm max-w-md" style="color:#3a4a3f;">Each card pairs a regulated or phase-out-bound chemical class with the most-studied natural-product-derived alternative, plus a Technology Readiness Level (TRL) estimate based on the 2024–2026 literature.</p>
+  </div>
+
+  <div class="grid md:grid-cols-2 gap-6">
+
+    <!-- CARD 1 -->
+    <article class="card p-6">
+      <div class="flex items-start justify-between">
+        <div>
+          <div class="text-xs font-semibold tracking-widest" style="color:var(--rust);">01 · PESTICIDES</div>
+          <h3 class="serif text-2xl mt-1">Organophosphates &amp; Neonicotinoids</h3>
+        </div>
+        <div class="text-right">
+          <div class="num-big text-3xl" style="color:var(--moss);">TRL 6–7</div>
+          <div class="text-xs" style="color:#6b7a6e;">for botanicals</div>
+        </div>
+      </div>
+      <div class="mt-4 flex flex-wrap gap-2">
+        <span class="chip chip-hazard">⚠ Chlorpyrifos</span>
+        <span class="chip chip-hazard">⚠ Imidacloprid</span>
+        <span class="chip chip-nature">🌿 Azadirachtin (neem)</span>
+        <span class="chip chip-nature">🌿 Pyrethrins</span>
+        <span class="chip chip-nature">🌿 Spinosad</span>
+      </div>
+      <div class="mt-5">
+        <div class="flex justify-between text-xs mb-1"><span class="tag">TRL Progress</span><span style="color:#5a4417;">Commercializing</span></div>
+        <div class="trl-track"><div class="trl-fill" style="width:75%"></div></div>
+      </div>
+      <details class="mt-5 text-sm leading-relaxed" style="color:#1f2e24;">
+        <summary class="flex items-center justify-between font-semibold">
+          <span>Research &amp; adoption snapshot</span>
+          <span class="chev">▾</span>
+        </summary>
+        <div class="mt-3 space-y-2">
+          <p><strong>Azadirachtin</strong>, extracted from neem (<em>Azadirachta indica</em>), acts as an antifeedant and growth disruptor with low mammalian toxicity and rapid environmental degradation. EU-approved; global market ~USD 200M.</p>
+          <p><strong>Spinosad</strong> (from <em>Saccharopolyspora spinosa</em> fermentation) won a US Presidential Green Chemistry Award; now in wide use against thrips and fruit flies.</p>
+          <p><strong>Barriers:</strong> slower knock-down than synthetics, UV sensitivity, and batch variability in plant extracts. Formulation science (microencapsulation, synergists like piperonyl butoxide) is closing the gap.</p>
+        </div>
+      </details>
+    </article>
+
+    <!-- CARD 2 -->
+    <article class="card p-6">
+      <div class="flex items-start justify-between">
+        <div>
+          <div class="text-xs font-semibold tracking-widest" style="color:var(--rust);">02 · FLAME RETARDANTS</div>
+          <h3 class="serif text-2xl mt-1">Brominated (PBDEs) &amp; Organophosphate FRs</h3>
+        </div>
+        <div class="text-right">
+          <div class="num-big text-3xl" style="color:var(--moss);">TRL 4–5</div>
+          <div class="text-xs" style="color:#6b7a6e;">for bio-FRs</div>
+        </div>
+      </div>
+      <div class="mt-4 flex flex-wrap gap-2">
+        <span class="chip chip-hazard">⚠ DecaBDE</span>
+        <span class="chip chip-hazard">⚠ TCEP</span>
+        <span class="chip chip-nature">🌿 Lignin-derived FRs</span>
+        <span class="chip chip-nature">🌿 Tannin–phosphorus systems</span>
+        <span class="chip chip-nature">🌿 Phytic acid</span>
+      </div>
+      <div class="mt-5">
+        <div class="flex justify-between text-xs mb-1"><span class="tag">TRL Progress</span><span style="color:#5a4417;">Lab validated / pilot</span></div>
+        <div class="trl-track"><div class="trl-fill" style="width:50%"></div></div>
+      </div>
+      <details class="mt-5 text-sm leading-relaxed" style="color:#1f2e24;">
+        <summary class="flex items-center justify-between font-semibold">
+          <span>Research &amp; adoption snapshot</span>
+          <span class="chev">▾</span>
+        </summary>
+        <div class="mt-3 space-y-2">
+          <p><strong>Lignin</strong>, the second-most abundant biopolymer on Earth, is being phosphorylated or combined with intumescent systems to form char-forming flame retardants for epoxy resins, polyurethanes, and textiles. Dozens of 2022–2025 papers report UL-94 V-0 ratings.</p>
+          <p><strong>Tannins</strong> and <strong>phytic acid</strong> (from rice bran) act as bio-based acid sources and charring agents, replacing halogenated chemistry in coatings.</p>
+          <p><strong>Barriers:</strong> loading levels often need to be higher than synthetic FRs; thermal stability during polymer processing remains a research focus. No dominant commercial bio-FR yet, but several start-ups (e.g., in EU and Korea) are piloting lignin-FR compounds.</p>
+        </div>
+      </details>
+    </article>
+
+    <!-- CARD 3 -->
+    <article class="card p-6">
+      <div class="flex items-start justify-between">
+        <div>
+          <div class="text-xs font-semibold tracking-widest" style="color:var(--rust);">03 · INDUSTRIAL SOLVENTS</div>
+          <h3 class="serif text-2xl mt-1">Chlorinated Solvents (TCE, PCE, DCM)</h3>
+        </div>
+        <div class="text-right">
+          <div class="num-big text-3xl" style="color:var(--moss);">TRL 6–8</div>
+          <div class="text-xs" style="color:#6b7a6e;">for bio-solvents</div>
+        </div>
+      </div>
+      <div class="mt-4 flex flex-wrap gap-2">
+        <span class="chip chip-hazard">⚠ Trichloroethylene</span>
+        <span class="chip chip-hazard">⚠ Methylene chloride</span>
+        <span class="chip chip-nature">🍊 d-Limonene</span>
+        <span class="chip chip-nature">🌿 Ethyl lactate</span>
+        <span class="chip chip-nature">🌿 2-Methyl THF</span>
+      </div>
+      <div class="mt-5">
+        <div class="flex justify-between text-xs mb-1"><span class="tag">TRL Progress</span><span style="color:#5a4417;">Commercial</span></div>
+        <div class="trl-track"><div class="trl-fill" style="width:82%"></div></div>
+      </div>
+      <details class="mt-5 text-sm leading-relaxed" style="color:#1f2e24;">
+        <summary class="flex items-center justify-between font-semibold">
+          <span>Research &amp; adoption snapshot</span>
+          <span class="chev">▾</span>
+        </summary>
+        <div class="mt-3 space-y-2">
+          <p><strong>d-Limonene</strong>, recovered from citrus peel waste, is now a mainstream industrial degreaser and a key component in "citrus-based" cleaners. It has replaced DCM in several paint-stripping formulations post-EU restriction.</p>
+          <p><strong>Ethyl lactate</strong> (fermentation-derived) is a polar aprotic solvent approved under multiple green-solvent guidelines; used in coatings and pharmaceuticals.</p>
+          <p><strong>2-Methyl THF</strong>, derived from hemicellulose/furfural, has become a preferred replacement for THF in process chemistry, with several kilo-ton-scale suppliers (e.g., in China and France).</p>
+          <p><strong>Barriers:</strong> odor, flammability classification, and — for terpenes — susceptibility to oxidation. Still, this is the most mature of the five classes.</p>
+        </div>
+      </details>
+    </article>
+
+    <!-- CARD 4 -->
+    <article class="card p-6">
+      <div class="flex items-start justify-between">
+        <div>
+          <div class="text-xs font-semibold tracking-widest" style="color:var(--rust);">04 · PLASTICIZERS</div>
+          <h3 class="serif text-2xl mt-1">Phthalates &amp; Bisphenol A (BPA)</h3>
+        </div>
+        <div class="text-right">
+          <div class="num-big text-3xl" style="color:var(--moss);">TRL 4–6</div>
+          <div class="text-xs" style="color:#6b7a6e;">for bio-plasticizers</div>
+        </div>
+      </div>
+      <div class="mt-4 flex flex-wrap gap-2">
+        <span class="chip chip-hazard">⚠ DEHP</span>
+        <span class="chip chip-hazard">⚠ BPA</span>
+        <span class="chip chip-nature">🌿 Acetylated vegetable oils</span>
+        <span class="chip chip-nature">🌿 Isosorbide diesters</span>
+        <span class="chip chip-nature">🌿 Lignin bisguaiacol F</span>
+      </div>
+      <div class="mt-5">
+        <div class="flex justify-between text-xs mb-1"><span class="tag">TRL Progress</span><span style="color:#5a4417;">Pilot / early commercial</span></div>
+        <div class="trl-track"><div class="trl-fill" style="width:58%"></div></div>
+      </div>
+      <details class="mt-5 text-sm leading-relaxed" style="color:#1f2e24;">
+        <summary class="flex items-center justify-between font-semibold">
+          <span>Research &amp; adoption snapshot</span>
+          <span class="chev">▾</span>
+        </summary>
+        <div class="mt-3 space-y-2">
+          <p><strong>Epoxidized soybean oil (ESBO)</strong> and <strong>acetylated castor oil</strong> are already in commercial PVC formulations as co-plasticizers, replacing 20–40% of phthalate loadings.</p>
+          <p><strong>Isosorbide</strong> (from glucose) is being esterified into di-carboxylate plasticizers with performance comparable to DOTP; Roquette and others have scaled production.</p>
+          <p><strong>Bio-based BPA substitutes:</strong> recent work on <strong>bisguaiacol F</strong> derived from lignin shows similar epoxy-resin performance with markedly lower endocrine-disruption potential in preliminary assays (2023–2025).</p>
+          <p><strong>Barriers:</strong> migration testing, long-term durability data, and price parity with petrochemical phthalates.</p>
+        </div>
+      </details>
+    </article>
+
+    <!-- CARD 5 -->
+    <article class="card p-6 md:col-span-2">
+      <div class="flex items-start justify-between">
+        <div>
+          <div class="text-xs font-semibold tracking-widest" style="color:var(--rust);">05 · PRESERVATIVES &amp; BIOCIDES</div>
+          <h3 class="serif text-2xl mt-1">Parabens, Triclosan &amp; Formaldehyde Releasers</h3>
+        </div>
+        <div class="text-right">
+          <div class="num-big text-3xl" style="color:var(--moss);">TRL 5–7</div>
+          <div class="text-xs" style="color:#6b7a6e;">for botanicals</div>
+        </div>
+      </div>
+      <div class="mt-4 flex flex-wrap gap-2">
+        <span class="chip chip-hazard">⚠ Methylparaben</span>
+        <span class="chip chip-hazard">⚠ Triclosan</span>
+        <span class="chip chip-hazard">⚠ DMDM hydantoin</span>
+        <span class="chip chip-nature">🌿 Thymol / Carvacrol</span>
+        <span class="chip chip-nature">🌿 ε-Polylysine</span>
+        <span class="chip chip-nature">🌿 Grapefruit-seed extract</span>
+      </div>
+      <div class="mt-5 grid md:grid-cols-2 gap-6">
+        <div>
+          <div class="flex justify-between text-xs mb-1"><span class="tag">TRL Progress</span><span style="color:#5a4417;">Formulation stage</span></div>
+          <div class="trl-track"><div class="trl-fill" style="width:65%"></div></div>
+        </div>
+        <div></div>
+      </div>
+      <details class="mt-5 text-sm leading-relaxed" style="color:#1f2e24;">
+        <summary class="flex items-center justify-between font-semibold">
+          <span>Research &amp; adoption snapshot</span>
+          <span class="chev">▾</span>
+        </summary>
+        <div class="mt-3 space-y-2">
+          <p><strong>Thymol</strong> and <strong>carvacrol</strong> (from thyme and oregano) are potent broad-spectrum antimicrobials; used in "preservative-free" cosmetic lines and food-contact materials. Stability and odor remain formulation challenges.</p>
+          <p><strong>ε-Polylysine</strong>, a fermentation-derived peptide, is approved as a food preservative in Japan, Korea, and the US, and is being explored for medical-device coatings.</p>
+          <p><strong>Barriers:</strong> narrow spectrum in some cases, cost-per-kg versus parabens, and the need for multi-hurdle preservation systems rather than single-compound drop-in replacements.</p>
+        </div>
+      </details>
+    </article>
+
+  </div>
+
+  <!-- TRL CHART -->
+  <div class="card mt-10 p-6 md:p-8">
+    <div class="flex items-end justify-between flex-wrap gap-3 mb-4">
+  
